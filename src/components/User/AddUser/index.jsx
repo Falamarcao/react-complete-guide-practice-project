@@ -9,13 +9,9 @@ const AddUsers = (props) => {
   const initialState = { username: "", age: "" };
 
   const [state, setState] = useState(initialState);
-  const [errorMessage, setErrorMessage] = useState([]);
-  const [isErrorModalVisible, setIsErrorModalVisible] = useState(false);
+  const [errorMessages, setErrorMessages] = useState([]);
 
-  const handleOnClickErrorModal = () => {
-    setIsErrorModalVisible(false);
-    setErrorMessage([]);
-  };
+  const handleOnClickErrorModal = () => setErrorMessages([]);
 
   const handleOnChange = (event) =>
     setState((prevState) => {
@@ -23,43 +19,42 @@ const AddUsers = (props) => {
     });
 
   const validateForm = (value) => {
-    let message = [];
+    const messages = [];
 
     if (value.username === "") {
-      message.push("Username is required!");
+      messages.push("Username is required!");
     }
     if (!/^[a-zA-Z]+$/.test(value.username)) {
-      message.push("Username must have only letters.");
+      messages.push("Username must have only letters.");
     }
     if (value.age === null || value.age === "") {
-      message.push("Age is required!");
+      messages.push("Age is required!");
     }
     if (value.age < 1) {
-      message.push("Age must be greater than 0.");
+      messages.push("Age must be greater than 0.");
     }
 
-    return message;
+    return messages;
   };
 
   const handleOnSubmit = (event) => {
     event.preventDefault();
 
-    const message = validateForm(state);
-    if (message.length == 0) {
+    const messages = validateForm(state);
+    if (messages.length === 0) {
       state.id = "user" + Math.random().toString();
       state.age = parseInt(state.age);
       props.onAdd(state);
       setState(initialState);
     } else {
-      setErrorMessage(message);
-      setIsErrorModalVisible(true);
+      setErrorMessages(messages);
     }
   };
 
   return (
     <div>
-      {isErrorModalVisible && (
-        <ErrorModal message={errorMessage} onClick={handleOnClickErrorModal} />
+      {errorMessages.length > 0 && (
+        <ErrorModal message={errorMessages} onClick={handleOnClickErrorModal} />
       )}
       <form className={styles.input}>
         <label htmlFor="AddUser_username">Username</label>
