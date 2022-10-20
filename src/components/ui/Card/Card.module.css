@@ -10,6 +10,7 @@
 }
 
 .card {
+    display: flex;
     background: #edf0ff;
     width: var(--card-width);
     height: 32vh * 100%;
