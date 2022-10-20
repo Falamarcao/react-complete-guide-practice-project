@@ -35,7 +35,7 @@ const AddUsers = (props) => {
       message.push("Age is required!");
     }
     if (value.age < 1) {
-      message.push("Age must be grater than 0.");
+      message.push("Age must be greater than 0.");
     }
 
     return message;
