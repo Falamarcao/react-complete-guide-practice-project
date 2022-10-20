@@ -1,5 +1,6 @@
 import { useState } from "react";
 
+import Wrapper from "../../helpers/Wrapper";
 import ErrorModal from "../../ui/ErrorModal";
 import Button from "../../ui/Button";
 
@@ -52,7 +53,7 @@ const AddUsers = (props) => {
   };
 
   return (
-    <div>
+    <Wrapper>
       {errorMessages.length > 0 && (
         <ErrorModal message={errorMessages} onClick={handleOnClickErrorModal} />
       )}
@@ -77,7 +78,7 @@ const AddUsers = (props) => {
         />
         <Button type="submit" onClick={handleOnSubmit}></Button>
       </form>
-    </div>
+    </Wrapper>
   );
 };
 
