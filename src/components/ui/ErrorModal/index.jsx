@@ -1,6 +1,5 @@
 import { createPortal } from "react-dom";
 
-import Card from "../Card";
 import Button from "../Button";
 
 import styles from "./ErrorModal.module.css";
