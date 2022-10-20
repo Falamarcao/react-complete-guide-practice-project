@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 import Wrapper from "../../helpers/Wrapper";
 import ErrorModal from "../../ui/ErrorModal";
@@ -8,17 +8,12 @@ import Button from "../../ui/Button";
 import styles from "./AddUser.module.css";
 
 const AddUsers = (props) => {
-  const initialState = { username: "", age: "" };
+  const usernameInputRef = useRef();
+  const ageInputRef = useRef();
 
-  const [state, setState] = useState(initialState);
   const [errorMessages, setErrorMessages] = useState([]);
 
   const handleOnClickErrorModal = () => setErrorMessages([]);
-
-  const handleOnChange = (event) =>
-    setState((prevState) => {
-      return { ...prevState, [event.target.name]: event.target.value };
-    });
 
   const validateForm = (value) => {
     const messages = [];
@@ -29,7 +24,7 @@ const AddUsers = (props) => {
     if (!/^[a-zA-Z]+$/.test(value.username)) {
       messages.push("Username must have only letters.");
     }
-    if (value.age === null || value.age === "") {
+    if (isNaN(value.age)) {
       messages.push("Age is required!");
     }
     if (value.age < 1) {
@@ -42,12 +37,19 @@ const AddUsers = (props) => {
   const handleOnSubmit = (event) => {
     event.preventDefault();
 
-    const messages = validateForm(state);
+    const user = {
+      username: usernameInputRef.current.value,
+      age: parseInt(ageInputRef.current.value),
+    };
+
+    const messages = validateForm(user);
     if (messages.length === 0) {
-      state.id = "user" + Math.random().toString();
-      state.age = parseInt(state.age);
-      props.onAdd(state);
-      setState(initialState);
+      user.id = "user" + Math.random().toString();
+      props.onAdd(user);
+
+      // clear form
+      usernameInputRef.current.value = "";
+      ageInputRef.current.value = "";
     } else {
       setErrorMessages(messages);
     }
@@ -65,8 +67,7 @@ const AddUsers = (props) => {
             id="AddUser_username"
             name="username"
             type="text"
-            value={state.username}
-            onChange={handleOnChange}
+            ref={usernameInputRef}
           />
           <label htmlFor="AddUser_age">Age (Years)</label>
           <input
@@ -75,8 +76,7 @@ const AddUsers = (props) => {
             type="number"
             min="1"
             step="1"
-            value={state.age}
-            onChange={handleOnChange}
+            ref={ageInputRef}
           />
           <Button type="submit" onClick={handleOnSubmit}></Button>
         </form>
