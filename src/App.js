@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, Fragment } from "react";
 
 import Card from "./components/ui/Card";
 import AddUser from "./components/User/AddUser";
@@ -11,15 +11,23 @@ function App() {
 
   const handleAdd = (user) => setUsers((prevState) => [...prevState, user]);
 
+  /*
+   While the <Fragment key=""></Fragment> tag allows us to use the key attribute when needed,
+   e.g. a list, the empty <> </> tag is a short alternative.
+   
+   note: Only an example no need for both here.
+  */
   return (
-    <center>
-      <Card>
-        <AddUser onAdd={handleAdd} />
-      </Card>
-      <Card align="center">
-        <UsersList users={users} />
-      </Card>
-    </center>
+    <>
+      <Fragment>
+        <Card>
+          <AddUser onAdd={handleAdd} />
+        </Card>
+        <Card align="center">
+          <UsersList users={users} />
+        </Card>
+      </Fragment>
+    </>
   );
 }
 
