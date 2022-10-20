@@ -2,6 +2,7 @@ import { useState } from "react";
 
 import Wrapper from "../../helpers/Wrapper";
 import ErrorModal from "../../ui/ErrorModal";
+import Card from "../../ui/Card";
 import Button from "../../ui/Button";
 
 import styles from "./AddUser.module.css";
@@ -57,27 +58,29 @@ const AddUsers = (props) => {
       {errorMessages.length > 0 && (
         <ErrorModal message={errorMessages} onClick={handleOnClickErrorModal} />
       )}
-      <form className={styles.input}>
-        <label htmlFor="AddUser_username">Username</label>
-        <input
-          id="AddUser_username"
-          name="username"
-          type="text"
-          value={state.username}
-          onChange={handleOnChange}
-        />
-        <label htmlFor="AddUser_age">Age (Years)</label>
-        <input
-          id="AddUser_age"
-          name="age"
-          type="number"
-          min="1"
-          step="1"
-          value={state.age}
-          onChange={handleOnChange}
-        />
-        <Button type="submit" onClick={handleOnSubmit}></Button>
-      </form>
+      <Card>
+        <form className={styles.input}>
+          <label htmlFor="AddUser_username">Username</label>
+          <input
+            id="AddUser_username"
+            name="username"
+            type="text"
+            value={state.username}
+            onChange={handleOnChange}
+          />
+          <label htmlFor="AddUser_age">Age (Years)</label>
+          <input
+            id="AddUser_age"
+            name="age"
+            type="number"
+            min="1"
+            step="1"
+            value={state.age}
+            onChange={handleOnChange}
+          />
+          <Button type="submit" onClick={handleOnSubmit}></Button>
+        </form>
+      </Card>
     </Wrapper>
   );
 };

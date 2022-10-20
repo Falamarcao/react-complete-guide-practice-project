@@ -5,7 +5,7 @@ import styles from "./ErrorModal.module.css";
 
 const ErrorModal = (props) => {
   return (
-    <div>
+    <>
       <div className={styles.backdrop} onClick={props.onClick} />
       <div className={styles.modal}>
         <header className={styles.header}>
@@ -20,7 +20,7 @@ const ErrorModal = (props) => {
           <Button onClick={props.onClick}></Button>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

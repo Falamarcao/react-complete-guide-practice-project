@@ -1,6 +1,6 @@
 import { useState, Fragment } from "react";
 
-import Card from "./components/ui/Card";
+
 import AddUser from "./components/User/AddUser";
 import UsersList from "./components/User/UsersList";
 
@@ -20,12 +20,8 @@ function App() {
   return (
     <>
       <Fragment>
-        <Card>
-          <AddUser onAdd={handleAdd} />
-        </Card>
-        <Card align="center">
-          <UsersList users={users} />
-        </Card>
+        <AddUser onAdd={handleAdd} />
+        <UsersList users={users} />
       </Fragment>
     </>
   );
