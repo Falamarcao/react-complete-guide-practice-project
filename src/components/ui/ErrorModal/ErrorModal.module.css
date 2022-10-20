@@ -9,6 +9,9 @@
 }
 
 .modal {
+    background: white;
+        border-radius: 8px;
+        box-shadow: 0 0 2px 0px #4f005f inset, 0 0 2px 0px #4f005f;
     position: fixed;
     top: 30vh;
     left: 10%;
@@ -19,6 +22,7 @@
 
 .header {
     background: #4f005f;
+        border-radius: top 16px;
     padding: 1rem;
 }
 

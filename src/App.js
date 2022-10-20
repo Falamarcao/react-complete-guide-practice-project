@@ -8,7 +8,6 @@ import { USERS } from "./core/services/initialData";
 
 function App() {
   const [users, setUsers] = useState(USERS);
-  const [error, setError] = useState(null);
 
   const handleAdd = (user) => setUsers((prevState) => [...prevState, user]);
 
